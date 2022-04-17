@@ -1,0 +1,3 @@
+[submodule "client/daun"]
+	path = client/daun
+	url = https://github.com/BarsTiger/daun
