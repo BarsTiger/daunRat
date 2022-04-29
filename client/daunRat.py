@@ -4,9 +4,9 @@ import pysher
 import io
 from contextlib import redirect_stdout
 import subprocess
-import daun.modules as daun  # needed to use daun functionality from admin
 import sys
 sys.path.append('daun/modules')
+import daun.modules as daun  # needed to use daun functionality from admin
 
 client_id = int()
 
