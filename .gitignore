@@ -2,4 +2,5 @@
 /build/
 *.spec
 /.idea/
+/tests/
 env.py
