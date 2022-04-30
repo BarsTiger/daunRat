@@ -7,6 +7,7 @@ import subprocess
 import sys
 sys.path.append('daun/modules')
 import daun.modules as daun  # needed to use daun functionality from admin
+from modules.selfutil import daunrat  # needed to use self utility functions
 
 client_id = int()
 

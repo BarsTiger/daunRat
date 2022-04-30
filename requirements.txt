@@ -4,3 +4,12 @@ ezztui
 ezzthread
 PyQt5
 qt-thread-updater
+mss
+pyimgur
+psutil
+requests
+pyinstaller
+zstandard
+nuitka
+python-vlc
+playsound
