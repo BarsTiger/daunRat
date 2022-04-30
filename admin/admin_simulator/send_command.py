@@ -9,7 +9,7 @@ client = pusher.Pusher(
     key=key,
     secret=secret,
     cluster=cluster,
-    ssl=True
+    ssl=False
 )
 receiver = pysher.Pusher(key=key, cluster=cluster)
 
