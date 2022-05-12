@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="img">
+    <file>img/logo.png</file>
+    <file>img/screen-template.png</file>
+    <file>img/devices.png</file>
+    <file>img/screenshot.png</file>
+    <file>img/menu.png</file>
+  </qresource>
+</RCC>
