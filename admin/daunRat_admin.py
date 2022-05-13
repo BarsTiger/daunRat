@@ -1,5 +1,6 @@
 import sys
 from PyQt5 import QtWidgets, QtCore, QtGui
+from data.settings import Settings
 sys.path.append('gui')
 
 try:
@@ -17,13 +18,15 @@ MainWindow.show()
 def openMenu():
     width = ui.leftMenu.geometry().width()
     Ui_MainWindow.animation = QtCore.QPropertyAnimation(ui.leftMenu, b"minimumWidth")
-    Ui_MainWindow.animation.setDuration(300)
+    Ui_MainWindow.animation.setDuration(Settings.animation()["timing"])
     if width == 60:
         Ui_MainWindow.animation.setStartValue(60)
         Ui_MainWindow.animation.setEndValue(200)
     else:
         Ui_MainWindow.animation.setStartValue(200)
         Ui_MainWindow.animation.setEndValue(60)
+    Ui_MainWindow.animation.setEasingCurve(Settings.animation()["animation"])
+
     Ui_MainWindow.animation.start()
 
 
