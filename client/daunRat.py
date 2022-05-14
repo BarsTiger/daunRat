@@ -49,6 +49,11 @@ def on_python(data):
     print(python_logs)
 
 
+def ping(data):
+    print("Triggered ping")
+    client.trigger('client-' + str(client_id), 'ping', 'pong')
+
+
 def handle_connection_to_server(connection):
     global client_id
     print("Connected to server")
@@ -60,6 +65,7 @@ def handle_connection_to_server(connection):
     channel = receiver.subscribe('admin-' + client_id)
     print("Client id: " + client_id)
     channel.bind('connection_from_admin', lambda _: print("Connection from admin"))
+    channel.bind('ping', ping)
     channel.bind('command', on_command)
     channel.bind('python', on_python)
 
