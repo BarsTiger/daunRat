@@ -6,7 +6,8 @@ QWidget {
 }
 
 
-QScrollBar:vertical {
+QScrollBar:vertical,
+QScrollBar:horizontal {
     border: none;
     background: rgb(30, 30, 30);
     width: 10px;
@@ -14,14 +15,17 @@ QScrollBar:vertical {
     border-radius: 0px;
 }
 
-QScrollBar::handle:vertical {	
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal {	
     background-color: rgb(139, 139, 139);
     min-height: 30px;
     border-radius: 5px;
 }
 
 QScrollBar::handle:vertical:hover,
-QScrollBar::handle:vertical:pressed {	
+QScrollBar::handle:vertical:pressed,
+QScrollBar::handle:horizontal:hover,
+QScrollBar::handle:horizontal:pressed {	
     background-color: rgb(149, 149, 149);
 }
 
@@ -33,7 +37,9 @@ QScrollBar::down-arrow:vertical {
 }
 
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical,
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical{
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical, 
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
 
@@ -59,7 +65,7 @@ QPushButton:disabled {
 }
 
 
-QLineEdit {
+QLineEdit, QTextBrowser, QPlainTextEdit, QTextEdit {
     border-width: 1px;
     border-radius: 5px;
     border-style: solid;

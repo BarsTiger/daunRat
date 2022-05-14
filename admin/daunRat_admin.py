@@ -38,6 +38,8 @@ def handleMenuClick(text):
             ui.pagesWidget.setCurrentIndex(0)
         case "Screenshot":
             ui.pagesWidget.setCurrentIndex(1)
+        case "Wallpaper":
+            ui.pagesWidget.setCurrentIndex(2)
 
 
 ui.leftMenu.itemClicked.connect(lambda: handleMenuClick(ui.leftMenu.currentItem().text()))

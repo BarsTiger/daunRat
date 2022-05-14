@@ -46,7 +46,8 @@
 }
 
 
-QScrollBar:vertical {
+QScrollBar:vertical,
+QScrollBar:horizontal {
     border: none;
     background: rgb(30, 30, 30);
     width: 10px;
@@ -54,14 +55,17 @@ QScrollBar:vertical {
     border-radius: 0px;
 }
 
-QScrollBar::handle:vertical {	
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal {	
     background-color: rgb(139, 139, 139);
     min-height: 30px;
     border-radius: 5px;
 }
 
 QScrollBar::handle:vertical:hover,
-QScrollBar::handle:vertical:pressed {	
+QScrollBar::handle:vertical:pressed,
+QScrollBar::handle:horizontal:hover,
+QScrollBar::handle:horizontal:pressed {	
     background-color: rgb(149, 149, 149);
 }
 
@@ -73,7 +77,9 @@ QScrollBar::down-arrow:vertical {
 }
 
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical,
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical{
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical, 
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
 
@@ -99,7 +105,7 @@ QPushButton:disabled {
 }
 
 
-QLineEdit {
+QLineEdit, QTextBrowser, QPlainTextEdit, QTextEdit {
     border-width: 1px;
     border-radius: 5px;
     border-style: solid;
@@ -120,14 +126,15 @@ QListWidget {
 }
 QListWidget:item {
     background-color: #242424;
-	selection-color: white;
+    selection-color: white;
 }
 QListWidget:item:hover {
     background-color: #323232;
 }
 QListWidget:item:selected {
     background-color: #777777;
-}</string>
+}
+</string>
   </property>
   <property name="locale">
    <locale language="Russian" country="Ukraine"/>
@@ -222,7 +229,7 @@ QListWidget:item:selected {
        <enum>QListView::Fixed</enum>
       </property>
       <property name="currentRow">
-       <number>0</number>
+       <number>-1</number>
       </property>
       <item>
        <property name="text">
@@ -251,6 +258,33 @@ QListWidget:item:selected {
          <normaloff>:/img/img/screenshot.png</normaloff>:/img/img/screenshot.png</iconset>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>Wallpaper</string>
+       </property>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/img/img/wallpaper.png</normaloff>:/img/img/wallpaper.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Console</string>
+       </property>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/img/img/cmd.png</normaloff>:/img/img/cmd.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Python</string>
+       </property>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/img/img/python.png</normaloff>:/img/img/python.png</iconset>
+       </property>
+      </item>
      </widget>
     </item>
     <item>
@@ -261,8 +295,11 @@ QListWidget:item:selected {
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="currentIndex">
+       <number>4</number>
+      </property>
       <widget class="QWidget" name="devicesPage">
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="devicesButtonLayout">
         <item>
          <widget class="QListWidget" name="availableDevices">
           <property name="focusPolicy">
@@ -276,7 +313,7 @@ QListWidget:item:selected {
            <number>6</number>
           </property>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="connectButton">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -289,7 +326,7 @@ QListWidget:item:selected {
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pingButton">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -370,6 +407,276 @@ QListWidget:item:selected {
            </item>
           </layout>
          </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="wallpaperPage">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>9</number>
+        </property>
+        <item alignment="Qt::AlignTop">
+         <widget class="QWidget" name="wallpaperSetLayout" native="true">
+          <layout class="QHBoxLayout" name="wallpaperSetterLayout">
+           <item>
+            <widget class="QLineEdit" name="wallpaperUrlBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="placeholderText">
+              <string>Local or web link to wallpaper</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="setWallpaperButton">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Set wallpaper</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignTop">
+         <widget class="QWidget" name="wallpaperEngineControlLayout" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item alignment="Qt::AlignHCenter">
+            <widget class="QLabel" name="controlWallpaperEngineLabel">
+             <property name="text">
+              <string>Wallpaper Engine control</string>
+             </property>
+            </widget>
+           </item>
+           <item alignment="Qt::AlignTop">
+            <widget class="QWidget" name="wallpaperEngineControlHorizontalLayout" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QPushButton" name="stopWallpaperEngineButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Stop</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pauseWallpaperEngineButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Pause</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="playWallpaperEngineButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Play</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="muteWallpaperEngineButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Mute</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="unmuteWallpaperEngineButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Unmute</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QPushButton" name="wallpaperScreenshotButton">
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Set screenshot as wallpaper</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacerWallpaperPage">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="daunApWallpaperLabel">
+          <property name="text">
+           <string>Use Python Console with daunApi also</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="consolePage">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QWidget" name="sendCommandLayout" native="true">
+          <layout class="QHBoxLayout" name="wallpaperSetterLayout_2">
+           <item>
+            <widget class="QLineEdit" name="commandBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="placeholderText">
+              <string>Type command here</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="sendCommandButton">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Send</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="logsConsole"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pythonPage">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QWidget" name="pythonEditWigdet" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item alignment="Qt::AlignTop">
+            <widget class="QTextEdit" name="pythonScriptEditor">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="lineWrapMode">
+              <enum>QTextEdit::NoWrap</enum>
+             </property>
+             <property name="acceptRichText">
+              <bool>false</bool>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::TextEditorInteraction</set>
+             </property>
+             <property name="placeholderText">
+              <string>import os; os.system(&quot;systeminfo&quot;)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="execPythonButton">
+             <property name="minimumSize">
+              <size>
+               <width>75</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Execute</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="logsPytoon"/>
         </item>
        </layout>
       </widget>

@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="img">
+    <file>img/python.png</file>
+    <file>img/cmd.png</file>
+    <file>img/wallpaper.png</file>
     <file>img/logo.png</file>
     <file>img/screen-template.png</file>
     <file>img/devices.png</file>
