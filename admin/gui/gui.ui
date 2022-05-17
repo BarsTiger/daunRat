@@ -296,8 +296,48 @@ QListWidget:item:selected {
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
+      <widget class="QWidget" name="startPage">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+         <widget class="QLabel" name="dLogo">
+          <property name="styleSheet">
+           <string notr="true">font: 166pt &quot;Comic Sans MS&quot;;
+color: rgb(40, 40, 40);</string>
+          </property>
+          <property name="text">
+           <string>D</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+         <widget class="QLabel" name="label">
+          <property name="styleSheet">
+           <string notr="true">color: rgb(70, 70, 70);</string>
+          </property>
+          <property name="text">
+           <string>Choose panel in right side</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="devicesPage">
        <layout class="QVBoxLayout" name="devicesButtonLayout">
         <item>
@@ -649,7 +689,7 @@ QListWidget:item:selected {
               <set>Qt::TextEditorInteraction</set>
              </property>
              <property name="placeholderText">
-              <string>import os; os.system(&quot;systeminfo&quot;)</string>
+              <string>os.system(&quot;systeminfo&quot;)</string>
              </property>
             </widget>
            </item>

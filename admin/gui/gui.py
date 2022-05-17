@@ -33,7 +33,8 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "\n"
-"QScrollBar:vertical {\n"
+"QScrollBar:vertical,\n"
+"QScrollBar:horizontal {\n"
 "    border: none;\n"
 "    background: rgb(30, 30, 30);\n"
 "    width: 10px;\n"
@@ -41,14 +42,17 @@ class Ui_MainWindow(object):
 "    border-radius: 0px;\n"
 "}\n"
 "\n"
-"QScrollBar::handle:vertical {    \n"
+"QScrollBar::handle:vertical,\n"
+"QScrollBar::handle:horizontal {    \n"
 "    background-color: rgb(139, 139, 139);\n"
 "    min-height: 30px;\n"
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
 "QScrollBar::handle:vertical:hover,\n"
-"QScrollBar::handle:vertical:pressed {    \n"
+"QScrollBar::handle:vertical:pressed,\n"
+"QScrollBar::handle:horizontal:hover,\n"
+"QScrollBar::handle:horizontal:pressed {    \n"
 "    background-color: rgb(149, 149, 149);\n"
 "}\n"
 "\n"
@@ -60,7 +64,9 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical,\n"
-"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical{\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical, \n"
+"QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal,\n"
+"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {\n"
 "    background: none;\n"
 "}\n"
 "\n"
@@ -86,7 +92,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "\n"
-"QLineEdit {\n"
+"QLineEdit, QTextBrowser, QPlainTextEdit, QTextEdit {\n"
 "    border-width: 1px;\n"
 "    border-radius: 5px;\n"
 "    border-style: solid;\n"
@@ -114,7 +120,8 @@ class Ui_MainWindow(object):
 "}\n"
 "QListWidget:item:selected {\n"
 "    background-color: #777777;\n"
-"}")
+"}\n"
+"")
         MainWindow.setLocale(QtCore.QLocale(QtCore.QLocale.Russian, QtCore.QLocale.Ukraine))
         MainWindow.setDockOptions(QtWidgets.QMainWindow.AllowTabbedDocks|QtWidgets.QMainWindow.AnimatedDocks)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -177,6 +184,16 @@ class Ui_MainWindow(object):
         icon4.addPixmap(QtGui.QPixmap(":/img/img/wallpaper.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         item.setIcon(icon4)
         self.leftMenu.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(":/img/img/cmd.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        item.setIcon(icon5)
+        self.leftMenu.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap(":/img/img/python.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        item.setIcon(icon6)
+        self.leftMenu.addItem(item)
         self.horizontalLayout.addWidget(self.leftMenu)
         self.pagesWidget = QtWidgets.QStackedWidget(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -185,6 +202,22 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.pagesWidget.sizePolicy().hasHeightForWidth())
         self.pagesWidget.setSizePolicy(sizePolicy)
         self.pagesWidget.setObjectName("pagesWidget")
+        self.startPage = QtWidgets.QWidget()
+        self.startPage.setObjectName("startPage")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.startPage)
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_6.setSpacing(0)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.dLogo = QtWidgets.QLabel(self.startPage)
+        self.dLogo.setStyleSheet("font: 166pt \"Comic Sans MS\";\n"
+"color: rgb(40, 40, 40);")
+        self.dLogo.setObjectName("dLogo")
+        self.verticalLayout_6.addWidget(self.dLogo, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.label = QtWidgets.QLabel(self.startPage)
+        self.label.setStyleSheet("color: rgb(70, 70, 70);")
+        self.label.setObjectName("label")
+        self.verticalLayout_6.addWidget(self.label, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.pagesWidget.addWidget(self.startPage)
         self.devicesPage = QtWidgets.QWidget()
         self.devicesPage.setObjectName("devicesPage")
         self.devicesButtonLayout = QtWidgets.QVBoxLayout(self.devicesPage)
@@ -296,11 +329,59 @@ class Ui_MainWindow(object):
         self.daunApWallpaperLabel.setObjectName("daunApWallpaperLabel")
         self.verticalLayout_3.addWidget(self.daunApWallpaperLabel)
         self.pagesWidget.addWidget(self.wallpaperPage)
+        self.consolePage = QtWidgets.QWidget()
+        self.consolePage.setObjectName("consolePage")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.consolePage)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.sendCommandLayout = QtWidgets.QWidget(self.consolePage)
+        self.sendCommandLayout.setObjectName("sendCommandLayout")
+        self.wallpaperSetterLayout_2 = QtWidgets.QHBoxLayout(self.sendCommandLayout)
+        self.wallpaperSetterLayout_2.setObjectName("wallpaperSetterLayout_2")
+        self.commandBox = QtWidgets.QLineEdit(self.sendCommandLayout)
+        self.commandBox.setMinimumSize(QtCore.QSize(0, 30))
+        self.commandBox.setObjectName("commandBox")
+        self.wallpaperSetterLayout_2.addWidget(self.commandBox)
+        self.sendCommandButton = QtWidgets.QPushButton(self.sendCommandLayout)
+        self.sendCommandButton.setMinimumSize(QtCore.QSize(100, 30))
+        self.sendCommandButton.setObjectName("sendCommandButton")
+        self.wallpaperSetterLayout_2.addWidget(self.sendCommandButton)
+        self.verticalLayout_4.addWidget(self.sendCommandLayout)
+        self.logsConsole = QtWidgets.QTextBrowser(self.consolePage)
+        self.logsConsole.setObjectName("logsConsole")
+        self.verticalLayout_4.addWidget(self.logsConsole)
+        self.pagesWidget.addWidget(self.consolePage)
+        self.pythonPage = QtWidgets.QWidget()
+        self.pythonPage.setObjectName("pythonPage")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.pythonPage)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.pythonEditWigdet = QtWidgets.QWidget(self.pythonPage)
+        self.pythonEditWigdet.setObjectName("pythonEditWigdet")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.pythonEditWigdet)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.pythonScriptEditor = QtWidgets.QTextEdit(self.pythonEditWigdet)
+        self.pythonScriptEditor.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.pythonScriptEditor.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
+        self.pythonScriptEditor.setAcceptRichText(False)
+        self.pythonScriptEditor.setTextInteractionFlags(QtCore.Qt.TextEditorInteraction)
+        self.pythonScriptEditor.setObjectName("pythonScriptEditor")
+        self.horizontalLayout_3.addWidget(self.pythonScriptEditor, 0, QtCore.Qt.AlignTop)
+        self.execPythonButton = QtWidgets.QPushButton(self.pythonEditWigdet)
+        self.execPythonButton.setMinimumSize(QtCore.QSize(75, 50))
+        self.execPythonButton.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.execPythonButton.setObjectName("execPythonButton")
+        self.horizontalLayout_3.addWidget(self.execPythonButton)
+        self.verticalLayout_5.addWidget(self.pythonEditWigdet)
+        self.logsPytoon = QtWidgets.QTextBrowser(self.pythonPage)
+        self.logsPytoon.setObjectName("logsPytoon")
+        self.verticalLayout_5.addWidget(self.logsPytoon)
+        self.pagesWidget.addWidget(self.pythonPage)
         self.horizontalLayout.addWidget(self.pagesWidget)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         self.leftMenu.setCurrentRow(-1)
+        self.pagesWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -316,7 +397,13 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Screenshot"))
         item = self.leftMenu.item(3)
         item.setText(_translate("MainWindow", "Wallpaper"))
+        item = self.leftMenu.item(4)
+        item.setText(_translate("MainWindow", "Console"))
+        item = self.leftMenu.item(5)
+        item.setText(_translate("MainWindow", "Python"))
         self.leftMenu.setSortingEnabled(__sortingEnabled)
+        self.dLogo.setText(_translate("MainWindow", "D"))
+        self.label.setText(_translate("MainWindow", "Choose panel in right side"))
         self.connectButton.setText(_translate("MainWindow", "Connect"))
         self.pingButton.setText(_translate("MainWindow", "Ping"))
         self.takeScreenshotButton.setText(_translate("MainWindow", "Take screenshot"))
@@ -330,6 +417,10 @@ class Ui_MainWindow(object):
         self.unmuteWallpaperEngineButton.setText(_translate("MainWindow", "Unmute"))
         self.wallpaperScreenshotButton.setText(_translate("MainWindow", "Set screenshot as wallpaper"))
         self.daunApWallpaperLabel.setText(_translate("MainWindow", "Use Python Console with daunApi also"))
+        self.commandBox.setPlaceholderText(_translate("MainWindow", "Type command here"))
+        self.sendCommandButton.setText(_translate("MainWindow", "Send"))
+        self.pythonScriptEditor.setPlaceholderText(_translate("MainWindow", "os.system(\"systeminfo\")"))
+        self.execPythonButton.setText(_translate("MainWindow", "Execute"))
 import images_rc
 
 

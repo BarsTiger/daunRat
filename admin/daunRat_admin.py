@@ -35,11 +35,15 @@ def handleMenuClick(text):
         case "Menu":
             openMenu()
         case "Devices":
-            ui.pagesWidget.setCurrentIndex(0)
-        case "Screenshot":
             ui.pagesWidget.setCurrentIndex(1)
-        case "Wallpaper":
+        case "Screenshot":
             ui.pagesWidget.setCurrentIndex(2)
+        case "Wallpaper":
+            ui.pagesWidget.setCurrentIndex(3)
+        case "Console":
+            ui.pagesWidget.setCurrentIndex(4)
+        case "Python":
+            ui.pagesWidget.setCurrentIndex(5)
 
 
 ui.leftMenu.itemClicked.connect(lambda: handleMenuClick(ui.leftMenu.currentItem().text()))
