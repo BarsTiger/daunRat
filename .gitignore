@@ -5,3 +5,4 @@
 /tests/
 env.py
 /client/dist/
+settings.json

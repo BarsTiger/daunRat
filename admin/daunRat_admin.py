@@ -8,10 +8,15 @@ try:
 except ImportError:
     from gui.gui import Ui_MainWindow
 
+settings = Settings.get_settings()
+
 app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
+
+ui.chooseAnimationBox.setCurrentText(settings["animation"])
+
 MainWindow.show()
 
 
