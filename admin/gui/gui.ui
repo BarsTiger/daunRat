@@ -517,7 +517,7 @@ color: rgb(40, 40, 40);</string>
            <string notr="true">color: rgb(70, 70, 70);</string>
           </property>
           <property name="text">
-           <string>Choose panel in right side, scroll menu to see more</string>
+           <string>Choose panel in left side, scroll menu to see more</string>
           </property>
          </widget>
         </item>

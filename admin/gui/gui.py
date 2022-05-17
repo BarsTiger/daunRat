@@ -690,7 +690,7 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Settings"))
         self.leftMenu.setSortingEnabled(__sortingEnabled)
         self.dLogo.setText(_translate("MainWindow", "D"))
-        self.choosePanelLabel.setText(_translate("MainWindow", "Choose panel in right side, scroll menu to see more"))
+        self.choosePanelLabel.setText(_translate("MainWindow", "Choose panel in left side, scroll menu to see more"))
         self.connectButton.setText(_translate("MainWindow", "Connect"))
         self.pingButton.setText(_translate("MainWindow", "Ping"))
         self.reconRefreshButton.setText(_translate("MainWindow", "Reconnect and refresh"))
