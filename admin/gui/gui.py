@@ -26,7 +26,8 @@ class Ui_MainWindow(object):
         icon.addPixmap(QtGui.QPixmap(":/img/img/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setAutoFillBackground(False)
-        MainWindow.setStyleSheet("QWidget {\n"
+        MainWindow.setStyleSheet("\n"
+"QWidget {\n"
 "    background-color: rgb(30, 30, 30);\n"
 "    color: rgb(255, 255, 255);\n"
 "    font: 10pt \"Segoe UI\";\n"
@@ -121,6 +122,172 @@ class Ui_MainWindow(object):
 "QListWidget:item:selected {\n"
 "    background-color: #777777;\n"
 "}\n"
+"\n"
+"\n"
+"QComboBox\n"
+"{\n"
+"    border-width: 1px;\n"
+"    border-radius:6px;\n"
+"    border-style: solid;\n"
+"    border-color: #303030;\n"
+"    background-color: #2c2d2e;\n"
+"    color: #ffffff;\n"
+"}\n"
+"\n"
+"QComboBox::disabled\n"
+"{\n"
+"    background-color: #434343;\n"
+"    color: #656565;\n"
+"    border-color: #434343;\n"
+"}\n"
+"\n"
+"QComboBox:hover\n"
+"{\n"
+"    background-color: #323232;\n"
+"}\n"
+"\n"
+"QComboBox:on\n"
+"{\n"
+"    background-color: #434343;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    background-color: #434343;\n"
+"    color: #ffffff;\n"
+"    selection-background-color: #777777;\n"
+"    selection-color: white;\n"
+"    outline: 0;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    border-radius: 6px; \n"
+"}\n"
+"\n"
+"\n"
+"QTabBar::tab\n"
+"{\n"
+"    background-color: #2c2d2e;\n"
+"    color: #ffffff;\n"
+"    border-style: solid;\n"
+"    border-width: 1px;\n"
+"    border-top-left-radius: 3px;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-color: #303030;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:disabled\n"
+"{\n"
+"    background-color: #656565;\n"
+"    color: #656565;\n"
+"}\n"
+"\n"
+"QTabWidget::pane \n"
+"{\n"
+"    background-color: #a0a0a0;\n"
+"    color: #ffffff;\n"
+"    border: 3px solid;\n"
+"    border-radius: 15px;\n"
+"    border-color: #1c1c1c;\n"
+"}\n"
+"\n"
+"QTabBar::tab:selected\n"
+"{\n"
+"    background-color: #262728;\n"
+"    color: #ffffff;\n"
+"    border-style: solid;\n"
+"    border-width: 1px;\n"
+"    border-top-left-radius: 3px;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-color: #303030;\n"
+"    padding: 5px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:selected:disabled\n"
+"{\n"
+"    background-color: #404040;\n"
+"    color: #656565;\n"
+"}\n"
+"\n"
+"QTabBar::tab:!selected \n"
+"{\n"
+"    background-color: #262626;\n"
+"}\n"
+"\n"
+"QTabBar::tab:!selected:hover \n"
+"{\n"
+"    background-color: #323232;\n"
+"}\n"
+"\n"
+"QTabBar::tab:top:!selected \n"
+"{\n"
+"    margin-top: 3px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:bottom:!selected \n"
+"{\n"
+"    margin-bottom: 3px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:top, QTabBar::tab:bottom \n"
+"{\n"
+"    min-width: 8ex;\n"
+"    margin-right: -1px;\n"
+"    padding: 5px 10px 5px 10px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:top:selected \n"
+"{\n"
+"    border-bottom-color: none;\n"
+"}\n"
+"\n"
+"QTabBar::tab:bottom:selected \n"
+"{\n"
+"    border-top-color: none;\n"
+"}\n"
+"\n"
+"QTabBar::tab:top:last, QTabBar::tab:bottom:last,\n"
+"QTabBar::tab:top:only-one, QTabBar::tab:bottom:only-one \n"
+"{\n"
+"    margin-right: 0;\n"
+"}\n"
+"\n"
+"QTabBar::tab:left:!selected \n"
+"{\n"
+"    margin-right: 3px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:right:!selected\n"
+"{\n"
+"    margin-left: 3px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:left, QTabBar::tab:right \n"
+"{\n"
+"    min-height: 8ex;\n"
+"    margin-bottom: -1px;\n"
+"    padding: 10px 5px 10px 5px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:left:selected \n"
+"{\n"
+"    border-left-color: none;\n"
+"}\n"
+"\n"
+"QTabBar::tab:right:selected \n"
+"{\n"
+"    border-right-color: none;\n"
+"}\n"
+"\n"
+"QTabBar::tab:left:last, QTabBar::tab:right:last,\n"
+"QTabBar::tab:left:only-one, QTabBar::tab:right:only-one \n"
+"{\n"
+"    margin-bottom: 0;\n"
+"}\n"
 "")
         MainWindow.setLocale(QtCore.QLocale(QtCore.QLocale.Russian, QtCore.QLocale.Ukraine))
         MainWindow.setDockOptions(QtWidgets.QMainWindow.AllowTabbedDocks|QtWidgets.QMainWindow.AnimatedDocks)
@@ -194,6 +361,16 @@ class Ui_MainWindow(object):
         icon6.addPixmap(QtGui.QPixmap(":/img/img/python.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         item.setIcon(icon6)
         self.leftMenu.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap(":/img/img/download.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        item.setIcon(icon7)
+        self.leftMenu.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(":/img/img/settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        item.setIcon(icon8)
+        self.leftMenu.addItem(item)
         self.horizontalLayout.addWidget(self.leftMenu)
         self.pagesWidget = QtWidgets.QStackedWidget(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -213,10 +390,10 @@ class Ui_MainWindow(object):
 "color: rgb(40, 40, 40);")
         self.dLogo.setObjectName("dLogo")
         self.verticalLayout_6.addWidget(self.dLogo, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
-        self.label = QtWidgets.QLabel(self.startPage)
-        self.label.setStyleSheet("color: rgb(70, 70, 70);")
-        self.label.setObjectName("label")
-        self.verticalLayout_6.addWidget(self.label, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.choosePanelLabel = QtWidgets.QLabel(self.startPage)
+        self.choosePanelLabel.setStyleSheet("color: rgb(70, 70, 70);")
+        self.choosePanelLabel.setObjectName("choosePanelLabel")
+        self.verticalLayout_6.addWidget(self.choosePanelLabel, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.pagesWidget.addWidget(self.startPage)
         self.devicesPage = QtWidgets.QWidget()
         self.devicesPage.setObjectName("devicesPage")
@@ -270,7 +447,7 @@ class Ui_MainWindow(object):
         self.wallpaperPage.setObjectName("wallpaperPage")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.wallpaperPage)
         self.verticalLayout_3.setContentsMargins(-1, -1, -1, 9)
-        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.setSpacing(6)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.wallpaperSetLayout = QtWidgets.QWidget(self.wallpaperPage)
         self.wallpaperSetLayout.setObjectName("wallpaperSetLayout")
@@ -323,8 +500,9 @@ class Ui_MainWindow(object):
         self.wallpaperScreenshotButton.setMaximumSize(QtCore.QSize(300, 16777215))
         self.wallpaperScreenshotButton.setObjectName("wallpaperScreenshotButton")
         self.verticalLayout_3.addWidget(self.wallpaperScreenshotButton, 0, QtCore.Qt.AlignHCenter)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_3.addItem(spacerItem)
+        self.wallpaperLogs = QtWidgets.QTextBrowser(self.wallpaperPage)
+        self.wallpaperLogs.setObjectName("wallpaperLogs")
+        self.verticalLayout_3.addWidget(self.wallpaperLogs)
         self.daunApWallpaperLabel = QtWidgets.QLabel(self.wallpaperPage)
         self.daunApWallpaperLabel.setObjectName("daunApWallpaperLabel")
         self.verticalLayout_3.addWidget(self.daunApWallpaperLabel)
@@ -349,6 +527,10 @@ class Ui_MainWindow(object):
         self.logsConsole = QtWidgets.QTextBrowser(self.consolePage)
         self.logsConsole.setObjectName("logsConsole")
         self.verticalLayout_4.addWidget(self.logsConsole)
+        self.clearConsoleLogs = QtWidgets.QPushButton(self.consolePage)
+        self.clearConsoleLogs.setMinimumSize(QtCore.QSize(0, 30))
+        self.clearConsoleLogs.setObjectName("clearConsoleLogs")
+        self.verticalLayout_4.addWidget(self.clearConsoleLogs)
         self.pagesWidget.addWidget(self.consolePage)
         self.pythonPage = QtWidgets.QWidget()
         self.pythonPage.setObjectName("pythonPage")
@@ -375,13 +557,110 @@ class Ui_MainWindow(object):
         self.logsPytoon = QtWidgets.QTextBrowser(self.pythonPage)
         self.logsPytoon.setObjectName("logsPytoon")
         self.verticalLayout_5.addWidget(self.logsPytoon)
+        self.clearPythonLogs = QtWidgets.QPushButton(self.pythonPage)
+        self.clearPythonLogs.setMinimumSize(QtCore.QSize(0, 30))
+        self.clearPythonLogs.setObjectName("clearPythonLogs")
+        self.verticalLayout_5.addWidget(self.clearPythonLogs)
         self.pagesWidget.addWidget(self.pythonPage)
-        self.horizontalLayout.addWidget(self.pagesWidget)
+        self.downloadFilePage = QtWidgets.QWidget()
+        self.downloadFilePage.setObjectName("downloadFilePage")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.downloadFilePage)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.downloadUrl = QtWidgets.QLineEdit(self.downloadFilePage)
+        self.downloadUrl.setMinimumSize(QtCore.QSize(0, 30))
+        self.downloadUrl.setObjectName("downloadUrl")
+        self.verticalLayout_10.addWidget(self.downloadUrl, 0, QtCore.Qt.AlignTop)
+        self.downloadButton = QtWidgets.QPushButton(self.downloadFilePage)
+        self.downloadButton.setMinimumSize(QtCore.QSize(0, 30))
+        self.downloadButton.setObjectName("downloadButton")
+        self.verticalLayout_10.addWidget(self.downloadButton, 0, QtCore.Qt.AlignTop)
+        self.downloadLogs = QtWidgets.QTextBrowser(self.downloadFilePage)
+        self.downloadLogs.setObjectName("downloadLogs")
+        self.verticalLayout_10.addWidget(self.downloadLogs)
+        self.clearDlLogsButton = QtWidgets.QPushButton(self.downloadFilePage)
+        self.clearDlLogsButton.setMinimumSize(QtCore.QSize(0, 30))
+        self.clearDlLogsButton.setObjectName("clearDlLogsButton")
+        self.verticalLayout_10.addWidget(self.clearDlLogsButton)
+        self.pagesWidget.addWidget(self.downloadFilePage)
+        self.settingsPage = QtWidgets.QWidget()
+        self.settingsPage.setObjectName("settingsPage")
+        self.gridLayout = QtWidgets.QGridLayout(self.settingsPage)
+        self.gridLayout.setObjectName("gridLayout")
+        self.settingsTabWidget = QtWidgets.QTabWidget(self.settingsPage)
+        self.settingsTabWidget.setStyleSheet("")
+        self.settingsTabWidget.setObjectName("settingsTabWidget")
+        self.visualSettingsTab = QtWidgets.QWidget()
+        self.visualSettingsTab.setObjectName("visualSettingsTab")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.visualSettingsTab)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.chooseAnimationLAbel = QtWidgets.QLabel(self.visualSettingsTab)
+        self.chooseAnimationLAbel.setObjectName("chooseAnimationLAbel")
+        self.verticalLayout_7.addWidget(self.chooseAnimationLAbel, 0, QtCore.Qt.AlignTop)
+        self.chooseAnimationBox = QtWidgets.QComboBox(self.visualSettingsTab)
+        self.chooseAnimationBox.setMinimumSize(QtCore.QSize(0, 30))
+        self.chooseAnimationBox.setObjectName("chooseAnimationBox")
+        self.chooseAnimationBox.addItem("")
+        self.chooseAnimationBox.addItem("")
+        self.chooseAnimationBox.addItem("")
+        self.chooseAnimationBox.addItem("")
+        self.chooseAnimationBox.addItem("")
+        self.verticalLayout_7.addWidget(self.chooseAnimationBox, 0, QtCore.Qt.AlignTop)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_7.addItem(spacerItem)
+        self.settingsTabWidget.addTab(self.visualSettingsTab, "")
+        self.pusherSettingTab = QtWidgets.QWidget()
+        self.pusherSettingTab.setObjectName("pusherSettingTab")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.pusherSettingTab)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.pusher_app_id_edit = QtWidgets.QLineEdit(self.pusherSettingTab)
+        self.pusher_app_id_edit.setMinimumSize(QtCore.QSize(0, 30))
+        self.pusher_app_id_edit.setObjectName("pusher_app_id_edit")
+        self.verticalLayout_8.addWidget(self.pusher_app_id_edit)
+        self.pusher_key_edit = QtWidgets.QLineEdit(self.pusherSettingTab)
+        self.pusher_key_edit.setMinimumSize(QtCore.QSize(0, 30))
+        self.pusher_key_edit.setObjectName("pusher_key_edit")
+        self.verticalLayout_8.addWidget(self.pusher_key_edit)
+        self.pusher_secret_edit = QtWidgets.QLineEdit(self.pusherSettingTab)
+        self.pusher_secret_edit.setMinimumSize(QtCore.QSize(0, 30))
+        self.pusher_secret_edit.setObjectName("pusher_secret_edit")
+        self.verticalLayout_8.addWidget(self.pusher_secret_edit)
+        self.pusher_cluster_edit = QtWidgets.QLineEdit(self.pusherSettingTab)
+        self.pusher_cluster_edit.setMinimumSize(QtCore.QSize(0, 30))
+        self.pusher_cluster_edit.setObjectName("pusher_cluster_edit")
+        self.verticalLayout_8.addWidget(self.pusher_cluster_edit)
+        self.pushercom_label = QtWidgets.QLabel(self.pusherSettingTab)
+        self.pushercom_label.setObjectName("pushercom_label")
+        self.verticalLayout_8.addWidget(self.pushercom_label)
+        self.settingsTabWidget.addTab(self.pusherSettingTab, "")
+        self.imgurSettingsPage = QtWidgets.QWidget()
+        self.imgurSettingsPage.setObjectName("imgurSettingsPage")
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.imgurSettingsPage)
+        self.verticalLayout_9.setContentsMargins(-1, 9, 9, -1)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.imgurClientId = QtWidgets.QLineEdit(self.imgurSettingsPage)
+        self.imgurClientId.setMinimumSize(QtCore.QSize(0, 30))
+        self.imgurClientId.setObjectName("imgurClientId")
+        self.verticalLayout_9.addWidget(self.imgurClientId, 0, QtCore.Qt.AlignTop)
+        self.imgurLabel = QtWidgets.QLabel(self.imgurSettingsPage)
+        self.imgurLabel.setMinimumSize(QtCore.QSize(0, 30))
+        self.imgurLabel.setObjectName("imgurLabel")
+        self.verticalLayout_9.addWidget(self.imgurLabel, 0, QtCore.Qt.AlignTop)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_9.addItem(spacerItem1)
+        self.settingsTabWidget.addTab(self.imgurSettingsPage, "")
+        self.gridLayout.addWidget(self.settingsTabWidget, 0, 0, 1, 1, QtCore.Qt.AlignTop)
+        self.saveSettingsButton = QtWidgets.QPushButton(self.settingsPage)
+        self.saveSettingsButton.setMinimumSize(QtCore.QSize(0, 30))
+        self.saveSettingsButton.setObjectName("saveSettingsButton")
+        self.gridLayout.addWidget(self.saveSettingsButton, 1, 0, 1, 1)
+        self.pagesWidget.addWidget(self.settingsPage)
+        self.horizontalLayout.addWidget(self.pagesWidget, 0, QtCore.Qt.AlignTop)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         self.leftMenu.setCurrentRow(-1)
         self.pagesWidget.setCurrentIndex(0)
+        self.settingsTabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -401,9 +680,13 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Console"))
         item = self.leftMenu.item(5)
         item.setText(_translate("MainWindow", "Python"))
+        item = self.leftMenu.item(6)
+        item.setText(_translate("MainWindow", "Download"))
+        item = self.leftMenu.item(7)
+        item.setText(_translate("MainWindow", "Settings"))
         self.leftMenu.setSortingEnabled(__sortingEnabled)
         self.dLogo.setText(_translate("MainWindow", "D"))
-        self.label.setText(_translate("MainWindow", "Choose panel in right side"))
+        self.choosePanelLabel.setText(_translate("MainWindow", "Choose panel in right side"))
         self.connectButton.setText(_translate("MainWindow", "Connect"))
         self.pingButton.setText(_translate("MainWindow", "Ping"))
         self.takeScreenshotButton.setText(_translate("MainWindow", "Take screenshot"))
@@ -419,8 +702,35 @@ class Ui_MainWindow(object):
         self.daunApWallpaperLabel.setText(_translate("MainWindow", "Use Python Console with daunApi also"))
         self.commandBox.setPlaceholderText(_translate("MainWindow", "Type command here"))
         self.sendCommandButton.setText(_translate("MainWindow", "Send"))
+        self.clearConsoleLogs.setText(_translate("MainWindow", "Clear logs"))
         self.pythonScriptEditor.setPlaceholderText(_translate("MainWindow", "os.system(\"systeminfo\")"))
         self.execPythonButton.setText(_translate("MainWindow", "Execute"))
+        self.clearPythonLogs.setText(_translate("MainWindow", "Clear logs"))
+        self.downloadUrl.setPlaceholderText(_translate("MainWindow", "File url"))
+        self.downloadButton.setText(_translate("MainWindow", "Download"))
+        self.downloadLogs.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.clearDlLogsButton.setText(_translate("MainWindow", "Clear logs"))
+        self.chooseAnimationLAbel.setText(_translate("MainWindow", "Choose menu animation"))
+        self.chooseAnimationBox.setItemText(0, _translate("MainWindow", "InOutQuart"))
+        self.chooseAnimationBox.setItemText(1, _translate("MainWindow", "InOutBack"))
+        self.chooseAnimationBox.setItemText(2, _translate("MainWindow", "InOutBounce"))
+        self.chooseAnimationBox.setItemText(3, _translate("MainWindow", "OutBack"))
+        self.chooseAnimationBox.setItemText(4, _translate("MainWindow", "OutElastic"))
+        self.settingsTabWidget.setTabText(self.settingsTabWidget.indexOf(self.visualSettingsTab), _translate("MainWindow", "Visual"))
+        self.pusher_app_id_edit.setPlaceholderText(_translate("MainWindow", "app_id"))
+        self.pusher_key_edit.setPlaceholderText(_translate("MainWindow", "key"))
+        self.pusher_secret_edit.setPlaceholderText(_translate("MainWindow", "secret"))
+        self.pusher_cluster_edit.setPlaceholderText(_translate("MainWindow", "cluster"))
+        self.pushercom_label.setText(_translate("MainWindow", "Create account and application on pusher.com to get this data"))
+        self.settingsTabWidget.setTabText(self.settingsTabWidget.indexOf(self.pusherSettingTab), _translate("MainWindow", "Pusher"))
+        self.imgurClientId.setPlaceholderText(_translate("MainWindow", "client_id"))
+        self.imgurLabel.setText(_translate("MainWindow", "Create account on imgur, create app and paste Client ID here"))
+        self.settingsTabWidget.setTabText(self.settingsTabWidget.indexOf(self.imgurSettingsPage), _translate("MainWindow", "Imgur"))
+        self.saveSettingsButton.setText(_translate("MainWindow", "Save settings"))
 import images_rc
 
 

@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="img">
+    <file>img/download.png</file>
+    <file>img/settings.png</file>
     <file>img/python.png</file>
     <file>img/cmd.png</file>
     <file>img/wallpaper.png</file>

@@ -39,7 +39,8 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
+   <string notr="true">
+QWidget {
     background-color: rgb(30, 30, 30);
     color: rgb(255, 255, 255);
     font: 10pt &quot;Segoe UI&quot;;
@@ -133,6 +134,172 @@ QListWidget:item:hover {
 }
 QListWidget:item:selected {
     background-color: #777777;
+}
+
+
+QComboBox
+{
+    border-width: 1px;
+    border-radius:6px;
+    border-style: solid;
+    border-color: #303030;
+    background-color: #2c2d2e;
+    color: #ffffff;
+}
+
+QComboBox::disabled
+{
+    background-color: #434343;
+    color: #656565;
+    border-color: #434343;
+}
+
+QComboBox:hover
+{
+    background-color: #323232;
+}
+
+QComboBox:on
+{
+    background-color: #434343;
+}
+
+QComboBox QAbstractItemView
+{
+    background-color: #434343;
+    color: #ffffff;
+    selection-background-color: #777777;
+    selection-color: white;
+    outline: 0;
+}
+
+QComboBox::drop-down
+{
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-radius: 6px; 
+}
+
+
+QTabBar::tab
+{
+    background-color: #2c2d2e;
+    color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-color: #303030;
+    padding: 5px;
+}
+
+QTabBar::tab:disabled
+{
+    background-color: #656565;
+    color: #656565;
+}
+
+QTabWidget::pane 
+{
+    background-color: #a0a0a0;
+    color: #ffffff;
+    border: 3px solid;
+    border-radius: 15px;
+    border-color: #1c1c1c;
+}
+
+QTabBar::tab:selected
+{
+    background-color: #262728;
+    color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-color: #303030;
+    padding: 5px;
+}
+
+QTabBar::tab:selected:disabled
+{
+    background-color: #404040;
+    color: #656565;
+}
+
+QTabBar::tab:!selected 
+{
+    background-color: #262626;
+}
+
+QTabBar::tab:!selected:hover 
+{
+    background-color: #323232;
+}
+
+QTabBar::tab:top:!selected 
+{
+    margin-top: 3px;
+}
+
+QTabBar::tab:bottom:!selected 
+{
+    margin-bottom: 3px;
+}
+
+QTabBar::tab:top, QTabBar::tab:bottom 
+{
+    min-width: 8ex;
+    margin-right: -1px;
+    padding: 5px 10px 5px 10px;
+}
+
+QTabBar::tab:top:selected 
+{
+    border-bottom-color: none;
+}
+
+QTabBar::tab:bottom:selected 
+{
+    border-top-color: none;
+}
+
+QTabBar::tab:top:last, QTabBar::tab:bottom:last,
+QTabBar::tab:top:only-one, QTabBar::tab:bottom:only-one 
+{
+    margin-right: 0;
+}
+
+QTabBar::tab:left:!selected 
+{
+    margin-right: 3px;
+}
+
+QTabBar::tab:right:!selected
+{
+    margin-left: 3px;
+}
+
+QTabBar::tab:left, QTabBar::tab:right 
+{
+    min-height: 8ex;
+    margin-bottom: -1px;
+    padding: 10px 5px 10px 5px;
+}
+
+QTabBar::tab:left:selected 
+{
+    border-left-color: none;
+}
+
+QTabBar::tab:right:selected 
+{
+    border-right-color: none;
+}
+
+QTabBar::tab:left:last, QTabBar::tab:right:last,
+QTabBar::tab:left:only-one, QTabBar::tab:right:only-one 
+{
+    margin-bottom: 0;
 }
 </string>
   </property>
@@ -285,9 +452,27 @@ QListWidget:item:selected {
          <normaloff>:/img/img/python.png</normaloff>:/img/img/python.png</iconset>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>Download</string>
+       </property>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/img/img/download.png</normaloff>:/img/img/download.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Settings</string>
+       </property>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/img/img/settings.png</normaloff>:/img/img/settings.png</iconset>
+       </property>
+      </item>
      </widget>
     </item>
-    <item>
+    <item alignment="Qt::AlignTop">
      <widget class="QStackedWidget" name="pagesWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -327,7 +512,7 @@ color: rgb(40, 40, 40);</string>
          </widget>
         </item>
         <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="choosePanelLabel">
           <property name="styleSheet">
            <string notr="true">color: rgb(70, 70, 70);</string>
           </property>
@@ -453,7 +638,7 @@ color: rgb(40, 40, 40);</string>
       <widget class="QWidget" name="wallpaperPage">
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <property name="spacing">
-         <number>0</number>
+         <number>6</number>
         </property>
         <property name="bottomMargin">
          <number>9</number>
@@ -594,17 +779,7 @@ color: rgb(40, 40, 40);</string>
          </widget>
         </item>
         <item>
-         <spacer name="verticalSpacerWallpaperPage">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
+         <widget class="QTextBrowser" name="wallpaperLogs"/>
         </item>
         <item>
          <widget class="QLabel" name="daunApWallpaperLabel">
@@ -651,6 +826,19 @@ color: rgb(40, 40, 40);</string>
         </item>
         <item>
          <widget class="QTextBrowser" name="logsConsole"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearConsoleLogs">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Clear logs</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -717,6 +905,280 @@ color: rgb(40, 40, 40);</string>
         </item>
         <item>
          <widget class="QTextBrowser" name="logsPytoon"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearPythonLogs">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Clear logs</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="downloadFilePage">
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item alignment="Qt::AlignTop">
+         <widget class="QLineEdit" name="downloadUrl">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="placeholderText">
+           <string>File url</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignTop">
+         <widget class="QPushButton" name="downloadButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Download</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="downloadLogs">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearDlLogsButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Clear logs</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="settingsPage">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0" alignment="Qt::AlignTop">
+         <widget class="QTabWidget" name="settingsTabWidget">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="visualSettingsTab">
+           <attribute name="title">
+            <string>Visual</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item alignment="Qt::AlignTop">
+             <widget class="QLabel" name="chooseAnimationLAbel">
+              <property name="text">
+               <string>Choose menu animation</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignTop">
+             <widget class="QComboBox" name="chooseAnimationBox">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <item>
+               <property name="text">
+                <string>InOutQuart</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>InOutBack</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>InOutBounce</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>OutBack</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>OutElastic</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="visualSettingsSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="pusherSettingTab">
+           <attribute name="title">
+            <string>Pusher</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <item>
+             <widget class="QLineEdit" name="pusher_app_id_edit">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>app_id</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="pusher_key_edit">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>key</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="pusher_secret_edit">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>secret</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="pusher_cluster_edit">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>cluster</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="pushercom_label">
+              <property name="text">
+               <string>Create account and application on pusher.com to get this data</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="imgurSettingsPage">
+           <attribute name="title">
+            <string>Imgur</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_9">
+            <property name="topMargin">
+             <number>9</number>
+            </property>
+            <property name="rightMargin">
+             <number>9</number>
+            </property>
+            <item alignment="Qt::AlignTop">
+             <widget class="QLineEdit" name="imgurClientId">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="placeholderText">
+               <string>client_id</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignTop">
+             <widget class="QLabel" name="imgurLabel">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Create account on imgur, create app and paste Client ID here</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="imgurSettingsSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="saveSettingsButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Save settings</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

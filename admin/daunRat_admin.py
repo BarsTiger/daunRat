@@ -44,6 +44,10 @@ def handleMenuClick(text):
             ui.pagesWidget.setCurrentIndex(4)
         case "Python":
             ui.pagesWidget.setCurrentIndex(5)
+        case "Download":
+            ui.pagesWidget.setCurrentIndex(6)
+        case "Settings":
+            ui.pagesWidget.setCurrentIndex(7)
 
 
 ui.leftMenu.itemClicked.connect(lambda: handleMenuClick(ui.leftMenu.currentItem().text()))
