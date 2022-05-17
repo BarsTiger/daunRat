@@ -663,7 +663,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.leftMenu.setCurrentRow(-1)
-        self.pagesWidget.setCurrentIndex(1)
+        self.pagesWidget.setCurrentIndex(0)
         self.settingsTabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

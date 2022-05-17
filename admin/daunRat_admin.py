@@ -16,6 +16,7 @@ app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
+ui.pagesWidget.setCurrentIndex(0)
 
 try:
     fill_settings(ui)
