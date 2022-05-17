@@ -3,21 +3,31 @@ import json
 
 class Settings:
     @staticmethod
-    def get_settings():
+    def fix() -> None:
+        settings = {
+            "animation": "InOutQuart",
+            "app_id": None,
+            "key": None,
+            "secret": None,
+            "cluster": None,
+            "client_id": None
+        }
+        with open("data/settings.json", "w") as file:
+            json.dump(settings, file)
+
+    @staticmethod
+    def get_settings() -> dict:
         try:
             with open("data/settings.json", "r") as file:
                 settings = json.load(file)
-        except FileNotFoundError:
-            settings = {
-                "animation": "InOutQuart"
-            }
-            with open("data/settings.json", "w") as file:
-                json.dump(settings, file)
+        except FileNotFoundError | json.decoder.JSONDecodeError | KeyError | ValueError | TypeError:
+            Settings.fix()
+            Settings.get_settings()
 
         return settings
 
     @staticmethod
-    def animation():
+    def animation() -> dict:
         from PyQt5.QtCore import QEasingCurve
         with open("data/settings.json", "r") as file:
             settings = json.load(file)
@@ -41,3 +51,15 @@ class Settings:
             "animation": animation,
             "timing": timing
         }
+
+    @staticmethod
+    def update(key: str, value: str) -> dict:
+        with open("data/settings.json", "r") as file:
+            settings = json.load(file)
+
+        settings[key] = value
+
+        with open("data/settings.json", "w") as file:
+            json.dump(settings, file)
+
+        return settings

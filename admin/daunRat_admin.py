@@ -1,5 +1,5 @@
 import sys
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtWidgets, QtCore
 from data.settings import Settings
 sys.path.append('gui')
 
@@ -15,12 +15,23 @@ MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
 
-ui.chooseAnimationBox.setCurrentText(settings["animation"])
+
+def fill_settings() -> None:
+    ui.chooseAnimationBox.setCurrentText(settings["animation"])
+    ui.pusher_app_id_edit.setText(settings["app_id"])
+    ui.pusher_key_edit.setText(settings["key"])
+    ui.pusher_secret_edit.setText(settings["secret"])
+    ui.pusher_cluster_edit.setText(settings["cluster"])
+    ui.imgurClientId.setText(settings["client_id"])
+try:
+    fill_settings()
+except KeyError:
+    Settings.fix()
 
 MainWindow.show()
 
 
-def openMenu():
+def openMenu() -> None:
     width = ui.leftMenu.geometry().width()
     Ui_MainWindow.animation = QtCore.QPropertyAnimation(ui.leftMenu, b"minimumWidth")
     Ui_MainWindow.animation.setDuration(Settings.animation()["timing"])
@@ -35,7 +46,7 @@ def openMenu():
     Ui_MainWindow.animation.start()
 
 
-def handleMenuClick(text):
+def handleMenuClick(text: str) -> None:
     match text:
         case "Menu":
             openMenu()
