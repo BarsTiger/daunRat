@@ -481,7 +481,7 @@ QListWidget:item:selected {
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="startPage">
        <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -517,7 +517,7 @@ color: rgb(40, 40, 40);</string>
            <string notr="true">color: rgb(70, 70, 70);</string>
           </property>
           <property name="text">
-           <string>Choose panel in right side</string>
+           <string>Choose panel in right side, scroll menu to see more</string>
           </property>
          </widget>
         </item>
@@ -560,6 +560,19 @@ color: rgb(40, 40, 40);</string>
             </property>
             <property name="text">
              <string>Ping</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="reconRefreshButton">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Reconnect and refresh</string>
             </property>
            </widget>
           </item>

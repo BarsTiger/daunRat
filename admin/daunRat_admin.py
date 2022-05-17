@@ -5,8 +5,10 @@ sys.path.append('gui')
 
 try:
     from gui import Ui_MainWindow
+    from functions import *
 except ImportError:
     from gui.gui import Ui_MainWindow
+    from gui.functions import *
 
 settings = Settings.get_settings()
 
@@ -15,17 +17,10 @@ MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
 
-
-def fill_settings() -> None:
-    ui.chooseAnimationBox.setCurrentText(settings["animation"])
-    ui.pusher_app_id_edit.setText(settings["app_id"])
-    ui.pusher_key_edit.setText(settings["key"])
-    ui.pusher_secret_edit.setText(settings["secret"])
-    ui.pusher_cluster_edit.setText(settings["cluster"])
-    ui.imgurClientId.setText(settings["client_id"])
 try:
-    fill_settings()
-except KeyError:
+    fill_settings(ui)
+except Exception as e:
+    print(e)
     Settings.fix()
 
 MainWindow.show()
@@ -67,5 +62,6 @@ def handleMenuClick(text: str) -> None:
 
 
 ui.leftMenu.itemClicked.connect(lambda: handleMenuClick(ui.leftMenu.currentItem().text()))
+ui.saveSettingsButton.clicked.connect(lambda: update_settings(ui))
 
 sys.exit(app.exec_())
