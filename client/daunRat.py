@@ -9,6 +9,10 @@ import os
 sys.path.append('daun/modules')
 import daun.modules as daun  # needed to use daun functionality from admin
 from modules.selfutil import daunrat  # needed to use self utility functions
+try:
+    from custom_imports import *
+except ImportError:
+    pass
 
 client_id = str()
 
