@@ -115,7 +115,7 @@ def handle_connection_to_server(connection) -> None:
     print("Connected to server")
     print("Server returned: " + str(connection))
     for client_id_av in list(client.channels_info(prefix_filter='admin-')['channels']):
-        print("Channel: " + client_id_av)
+        print("Channel: " + client_id_av.split('-')[1])
 
 
 # Trying to connect to pusher

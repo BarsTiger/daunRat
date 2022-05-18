@@ -22,9 +22,9 @@ def handle_connection_to_server(connection):
     print("Connected to server")
     print("Server returned: " + str(connection))
     print("Available client IDs: " +
-          str(list(client.channels_info(prefix_filter='admin-')['channels']))
-          .replace('admin-', '').replace('[', '').replace(']', '').replace("'", ''))
-    client_id = int(input("Enter id to connect: "))
+          str(', '.join(list(map(lambda channel_id: channel_id.split('-')[-1],
+                                 list(client.channels_info(prefix_filter='admin-')['channels']))))))
+    client_id = input("Enter id to connect: ")
     client.trigger('admin-' + str(client_id), 'connection_from_admin', None)
     print("Sent connection message to client")
     log_channel = receiver.subscribe('client-' + str(client_id))
