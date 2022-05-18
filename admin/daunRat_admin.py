@@ -3,7 +3,9 @@ import sys
 from PyQt5 import QtWidgets, QtCore
 from data.settings import Settings
 import pusher
+import pusher.errors
 import pysher
+import modules.exception as exception
 sys.path.append('gui')
 # Importing the main window
 try:
@@ -12,6 +14,9 @@ try:
 except ImportError:
     from gui.gui import Ui_MainWindow
     from gui.functions import *
+
+# Hooking exceptions
+sys.excepthook = exception.hook
 
 # Getting config
 settings = Settings.get_settings()
@@ -54,13 +59,7 @@ def initialize_pusher() -> None:
     )
     receiver = pysher.Pusher(key=settings["key"], cluster=settings["cluster"])
     receiver.connection.bind('pusher:connection_established', handle_connection_to_server)
-    try:
-        receiver.connect()
-    except Exception as e:
-        popup("Error", "Could not connect to pusher server\n"
-                       "Do you have valid pusher config in settings tab?\n"
-                       "Check full error message in console")
-        print(e)
+    receiver.connect()
 
 
 def open_menu() -> None:
@@ -114,8 +113,23 @@ def handle_connection_to_server(connection) -> None:
     """
     print("Connected to server")
     print("Server returned: " + str(connection))
-    for client_id_av in list(client.channels_info(prefix_filter='admin-')['channels']):
-        print("Channel: " + client_id_av.split('-')[1])
+    try:
+        for client_id_av in list(client.channels_info(prefix_filter='admin-')['channels']):
+            print("Channel: " + client_id_av.split('-')[1])
+    except pusher.errors.PusherBadRequest:
+        popup("Error", "Could not connect to pusher server\n"
+                       "Do you have valid pusher config in settings tab?")
+
+
+def reconnect_to_pusher() -> None:
+    """
+    Reconnects to pusher
+    :return:
+    """
+    global receiver
+    receiver.disconnect()
+    print("Disconnected from pusher")
+    initialize_pusher()
 
 
 # Trying to connect to pusher
@@ -123,7 +137,8 @@ initialize_pusher()
 
 # Connecting user interface to functions
 ui.leftMenu.itemClicked.connect(lambda: handle_menu_click(ui.leftMenu.currentItem().text()))
-ui.saveSettingsButton.clicked.connect(lambda: update_settings(ui))
+ui.saveSettingsButton.clicked.connect(lambda: (globals().update(settings=update_settings(ui))))
+ui.reconRefreshButton.clicked.connect(lambda: reconnect_to_pusher())
 
 # Handling closing of the window to exit whole program
 sys.exit(app.exec_())

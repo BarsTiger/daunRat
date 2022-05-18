@@ -1,5 +1,6 @@
 from data.settings import Settings
 import ctypes
+from ezzthread import threaded
 
 
 def popup(title, text, style=0):
@@ -14,6 +15,11 @@ def popup(title, text, style=0):
     6 : Cancel | Try Again | Continue
     """
     return ctypes.windll.user32.MessageBoxW(0, text, title, style)
+
+
+@threaded
+def t_popup(title, text, style=0):
+    popup(title, text, style)
 
 
 def fill_settings(ui) -> None:
@@ -38,3 +44,4 @@ def update_settings(ui) -> None:
         "client_id": get_text(ui.imgurClientId.text().strip())
     }
     list(map((lambda x: Settings.update(x, settings[x])), settings))
+    return Settings.get_settings()
