@@ -129,6 +129,7 @@ def handle_connection_to_server(connection) -> None:
     print("Connected to server")
     print("Server returned: " + str(connection))
     try:
+        ui.availableDevices.clear()
         for client_id_av in list(client.channels_info(prefix_filter='admin-')['channels']):
             ui.availableDevices.addItem(client_id_av.split('-')[1])
     except pusher.errors.PusherBadRequest:
