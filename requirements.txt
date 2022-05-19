@@ -13,4 +13,3 @@ zstandard
 nuitka
 python-vlc
 playsound
-BlurWindow

@@ -6,7 +6,7 @@ import pusher
 import pusher.errors
 import pysher
 import modules.exception as exception
-from BlurWindow.blurWindow import GlobalBlur
+from gui.blurer import GlobalBlur
 sys.path.append('gui')
 # Importing the main window
 try:
@@ -34,7 +34,7 @@ MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
 ui.pagesWidget.setCurrentIndex(0)
-GlobalBlur(MainWindow.winId(), Acrylic=True)
+GlobalBlur(MainWindow.winId(), acrylic=True)
 
 # Trying to get settings or set default
 try:
