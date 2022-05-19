@@ -19,12 +19,10 @@ class Settings:
     def get_settings() -> dict:
         try:
             with open("data/settings.json", "r") as file:
-                settings = json.load(file)
-        except FileNotFoundError | json.decoder.JSONDecodeError | KeyError | ValueError | TypeError:
+                return json.load(file)
+        except:
             Settings.fix()
             Settings.get_settings()
-
-        return settings
 
     @staticmethod
     def animation() -> dict:

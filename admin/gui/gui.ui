@@ -41,8 +41,8 @@
   <property name="styleSheet">
    <string notr="true">
 QWidget {
-    background-color: rgb(30, 30, 30);
-    color: rgb(255, 255, 255);
+    background-color: rgba(30, 30, 30, 0.1);
+    color: white;
     font: 10pt &quot;Segoe UI&quot;;
 }
 
@@ -50,7 +50,7 @@ QWidget {
 QScrollBar:vertical,
 QScrollBar:horizontal {
     border: none;
-    background: rgb(30, 30, 30);
+    background: rgba(30, 30, 30, 0);
     width: 10px;
     margin: 15px 0 15px 0;
     border-radius: 0px;
@@ -58,7 +58,7 @@ QScrollBar:horizontal {
 
 QScrollBar::handle:vertical,
 QScrollBar::handle:horizontal {	
-    background-color: rgb(139, 139, 139);
+    background-color: rgba(139, 139, 139, 0);
     min-height: 30px;
     border-radius: 5px;
 }
@@ -67,7 +67,7 @@ QScrollBar::handle:vertical:hover,
 QScrollBar::handle:vertical:pressed,
 QScrollBar::handle:horizontal:hover,
 QScrollBar::handle:horizontal:pressed {	
-    background-color: rgb(149, 149, 149);
+    background-color: rgba(149, 149, 149, 0);
 }
 
 QScrollBar::sub-line:vertical,
@@ -90,19 +90,19 @@ QPushButton {
     border-width: 1px;
     border-radius:6px;
     border-style: solid;
-    border-color: #303030;
-    background-color: #2c2d2e;
+    border-color: rgba(48, 48, 48, 0.5);
+    background-color: rgba(44, 45, 46, 0.3);
 }
 QPushButton:hover {
     border-width: 2px;
-    background-color: #323232;
+    background-color: rgba(50, 50, 50, 0.7);
 }
 QPushButton:pressed {
-    background-color: #262728;
+    background-color: rgba(38, 39, 40, 0.7);
 }
 QPushButton:disabled {
-    background-color: #434343;
-    border-color: #0000;
+    background-color: rgba(67, 67, 67, 0.7);
+    border-color: rgba(0, 0, 0, 0.7);
 }
 
 
@@ -110,8 +110,8 @@ QLineEdit, QTextBrowser, QPlainTextEdit, QTextEdit {
     border-width: 1px;
     border-radius: 5px;
     border-style: solid;
-    border-color: #303030;
-    background-color: #242424;
+    border-color: rgba(48, 48, 48);
+    background-color: rgba(36, 36, 36, 0);
     font: 10pt &quot;Segoe UI&quot;;
 }
 
@@ -120,20 +120,20 @@ QListWidget {
     border-width: 1px;
     border-radius: 15px;
     border-style: solid;
-    border-color: #303030;
+    border-color: rgba(48, 48, 48);
     padding: 10px;
-    background-color: #242424;
+    background-color: rgba(100, 100, 100, 0);
     font: 10pt &quot;Segoe UI&quot;;
 }
 QListWidget:item {
-    background-color: #242424;
+    background-color: rgba(36, 36, 36, 0);
     selection-color: white;
 }
 QListWidget:item:hover {
-    background-color: #323232;
+    background-color: rgba(50, 50, 50, 0);
 }
 QListWidget:item:selected {
-    background-color: #777777;
+    background-color: rgba(119, 119, 119, 1);
 }
 
 
@@ -142,33 +142,33 @@ QComboBox
     border-width: 1px;
     border-radius:6px;
     border-style: solid;
-    border-color: #303030;
-    background-color: #2c2d2e;
-    color: #ffffff;
+    border-color: rgba(48, 48, 48);
+    background-color: rgba(44, 45, 46, 0);
+    color: white;
 }
 
 QComboBox::disabled
 {
-    background-color: #434343;
+    background-color: rgba(67, 67, 67, 0);
     color: #656565;
-    border-color: #434343;
+    border-color: rgba(67, 67, 67);
 }
 
 QComboBox:hover
 {
-    background-color: #323232;
+    background-color: rgba(50, 50, 50, 0);
 }
 
 QComboBox:on
 {
-    background-color: #434343;
+    background-color: rgba(67, 67, 67, 0);
 }
 
 QComboBox QAbstractItemView
 {
-    background-color: #434343;
+    background-color: rgba(67, 67, 67, 0);
     color: #ffffff;
-    selection-background-color: #777777;
+    selection-background-color: rgba(119, 119, 119, 0);
     selection-color: white;
     outline: 0;
 }
@@ -183,57 +183,57 @@ QComboBox::drop-down
 
 QTabBar::tab
 {
-    background-color: #2c2d2e;
+    background-color: rgba(44, 45, 46, 0);
     color: #ffffff;
     border-style: solid;
     border-width: 1px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    border-color: #303030;
+    border-color: rgba(48, 48, 48);
     padding: 5px;
 }
 
 QTabBar::tab:disabled
 {
-    background-color: #656565;
+    background-color: rgba(101, 101, 101, 0);
     color: #656565;
 }
 
 QTabWidget::pane 
 {
-    background-color: #a0a0a0;
+    background-color: rgba(160, 160, 160, 0);
     color: #ffffff;
     border: 3px solid;
     border-radius: 15px;
-    border-color: #1c1c1c;
+    border-color: rgba(28, 28, 28);
 }
 
 QTabBar::tab:selected
 {
-    background-color: #262728;
+    background-color: rgba(38, 39, 40, 0);
     color: #ffffff;
     border-style: solid;
     border-width: 1px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    border-color: #303030;
+    border-color: rgba(48, 48, 48);
     padding: 5px;
 }
 
 QTabBar::tab:selected:disabled
 {
-    background-color: #404040;
+    background-color: rgba(64, 64, 64, 0);
     color: #656565;
 }
 
 QTabBar::tab:!selected 
 {
-    background-color: #262626;
+    background-color: rgba(38, 38, 38, 0);
 }
 
 QTabBar::tab:!selected:hover 
 {
-    background-color: #323232;
+    background-color: rgba(50, 50, 50, 0);
 }
 
 QTabBar::tab:top:!selected 
@@ -344,26 +344,28 @@ QTabBar::tab:left:only-one, QTabBar::tab:right:only-one
        <enum>Qt::NoFocus</enum>
       </property>
       <property name="styleSheet">
-       <string notr="true">QListWidget {
+       <string notr="true">
+QListWidget {
     border-width: 0px;
     border-radius: 0px;
     border: none;
     padding: 0px;
-    background-color: #242424;
+    background-color: rgba(36, 36, 36, 0);
     font: 10pt &quot;Segoe UI&quot;;
 }
 QListWidget:item {
-	padding-left: 10px;
-	height: 60px;
-    background-color: #191919;
+    padding-left: 10px;
+    height: 60px;
+    background-color: rgba(25, 25, 25, 0);
     selection-color: rgba(255, 255, 255);
 }
 QListWidget:item:hover {
-    background-color: #323232;
+    background-color: rgba(50, 50, 50, 0);
 }
 QListWidget:item:selected {
-    background-color: #262728;
-}</string>
+    background-color: rgba(38, 39, 40, 0);
+}
+</string>
       </property>
       <property name="verticalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOff</enum>

