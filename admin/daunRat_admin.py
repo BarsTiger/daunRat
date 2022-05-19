@@ -62,7 +62,7 @@ def initialize_pusher() -> None:
     receiver.connect()
 
 
-def open_menu() -> None:
+def open_menu(*args) -> None:
     """
     Animates the menu to open and close, using animation from config
     :return:
@@ -87,23 +87,17 @@ def handle_menu_click(text: str) -> None:
     :param text:
     :return:
     """
-    match text:
-        case "Menu":
-            open_menu()
-        case "Devices":
-            ui.pagesWidget.setCurrentIndex(1)
-        case "Screenshot":
-            ui.pagesWidget.setCurrentIndex(2)
-        case "Wallpaper":
-            ui.pagesWidget.setCurrentIndex(3)
-        case "Console":
-            ui.pagesWidget.setCurrentIndex(4)
-        case "Python":
-            ui.pagesWidget.setCurrentIndex(5)
-        case "Download":
-            ui.pagesWidget.setCurrentIndex(6)
-        case "Settings":
-            ui.pagesWidget.setCurrentIndex(7)
+    index = {
+        "Menu": [open_menu, None],
+        "Devices": [ui.pagesWidget.setCurrentIndex, 1],
+        "Screenshot": [ui.pagesWidget.setCurrentIndex, 2],
+        "Wallpaper": [ui.pagesWidget.setCurrentIndex, 3],
+        "Console": [ui.pagesWidget.setCurrentIndex, 4],
+        "Python": [ui.pagesWidget.setCurrentIndex, 5],
+        "Download": [ui.pagesWidget.setCurrentIndex, 6],
+        "Settings": [ui.pagesWidget.setCurrentIndex, 7]
+    }
+    index[text][0](index[text][1])
 
 
 def handle_connection_to_server(connection) -> None:
