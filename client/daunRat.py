@@ -26,6 +26,10 @@ client = pusher.Pusher(
 receiver = pysher.Pusher(key=key, cluster=cluster)
 
 
+def log(message):
+    client.trigger(f'client-{client_id}', 'logs', message)
+
+
 def on_command(data):
     global client_id
     print("Shell command received")
