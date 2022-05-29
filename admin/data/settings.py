@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class Settings:
@@ -16,8 +17,12 @@ class Settings:
 
     @staticmethod
     def fix() -> None:
-        with open("data/settings.json", "w") as file:
-            json.dump(Settings.default(), file)
+        try:
+            with open("data/settings.json", "w+") as file:
+                json.dump(Settings.default(), file)
+        except FileNotFoundError:
+            os.mkdir("data")
+            Settings.fix()
 
     @staticmethod
     def get_settings() -> dict:
