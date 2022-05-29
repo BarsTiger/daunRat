@@ -3,17 +3,21 @@ import json
 
 class Settings:
     @staticmethod
-    def fix() -> None:
-        settings = {
+    def default():
+        return {
             "animation": "InOutQuart",
+            "theme": "Black acrylic",
             "app_id": None,
             "key": None,
             "secret": None,
             "cluster": None,
             "client_id": None
         }
+
+    @staticmethod
+    def fix() -> None:
         with open("data/settings.json", "w") as file:
-            json.dump(settings, file)
+            json.dump(Settings.default(), file)
 
     @staticmethod
     def get_settings() -> dict:
@@ -61,3 +65,11 @@ class Settings:
             json.dump(settings, file)
 
         return settings
+
+    @staticmethod
+    def get(key: str) -> any:
+        try:
+            return Settings.get_settings()[key]
+        except KeyError:
+            Settings.update(key, Settings.default()[key])
+            return Settings.default()[key]

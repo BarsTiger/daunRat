@@ -36,7 +36,9 @@ MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
 ui.pagesWidget.setCurrentIndex(0)
-GlobalBlur(MainWindow.winId(), acrylic=True)
+
+if 'acrylic' in Settings.get("theme"):
+    GlobalBlur(MainWindow.winId(), acrylic=True)
 
 # Trying to get settings or set default
 try:

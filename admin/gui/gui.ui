@@ -1021,6 +1021,38 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item>
+             <widget class="QLabel" name="chooseThemeLabel">
+              <property name="text">
+               <string>Admin theme (requires app restart)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="chooseThemeBox">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <item>
+               <property name="text">
+                <string>Black acrylic</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Black</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Dark gray</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
              <spacer name="visualSettingsSpacer">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
