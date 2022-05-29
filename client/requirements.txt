@@ -2,7 +2,6 @@ pusher
 pysher
 ezztui
 ezzthread
-PyQt5
 mss
 pyimgur
 psutil

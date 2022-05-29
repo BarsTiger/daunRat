@@ -3,6 +3,7 @@
 *.spec
 /.idea/
 /tests/
+*/venv/
 env.py
 /client/dist/
 settings.json

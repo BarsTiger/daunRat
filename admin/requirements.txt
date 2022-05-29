@@ -1,0 +1,6 @@
+pusher
+pysher
+ezzthread
+PyQt5
+requests
+pyinstaller
