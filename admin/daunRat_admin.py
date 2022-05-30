@@ -192,7 +192,7 @@ def handle_connection_to_server(connection) -> None:
     try:
         ui.availableDevices.clear()
         for client_id_av in list(client.channels_info(prefix_filter='admin-')['channels']):
-            ui.availableDevices.addItem(client_id_av.split('-')[1])
+            ui.availableDevices.addItem(client_id_av.removeprefix('admin-'))
     except pusher.errors.PusherBadRequest:
         popup("Error", "Could not connect to pusher server\n"
                        "Do you have valid pusher config in settings tab?")
