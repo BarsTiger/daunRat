@@ -2,6 +2,7 @@ pusher
 pysher
 ezztui
 ezzthread
+windows-curses
 mss
 pyimgur
 psutil
